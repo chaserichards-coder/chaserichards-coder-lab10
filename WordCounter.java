@@ -105,13 +105,18 @@ public static int processText(StringBuffer text, String stopword) throws TooSmal
     
         try {
             // Determine if first argument is a file or direct text
+            // if there are more than 0 arguments and there is a file in the first argument.
             if (args.length > 0 && new File(args[0]).exists()) {
+                //process the first file in the first argument
                 text = processFile(args[0]);
+                //if arguments length is greater than 0.
             } else if (args.length > 0) {
+                //text will be a stringbuffer with the contents in first argument.
                 text = new StringBuffer(args[0]);
             } else {
                 // No arguments: ask user to enter text
                 System.out.println("Enter text to process:");
+                
                 text = new StringBuffer(input.nextLine());
             }
     
@@ -144,6 +149,7 @@ public static int processText(StringBuffer text, String stopword) throws TooSmal
         } catch (EmptyFileException e) {
             // If file is empty, report but continue with empty text
             System.out.println("EmptyFileException: " + e.getMessage());
+            
             text = new StringBuffer("");
             try {
                 processText(text, stopword);
